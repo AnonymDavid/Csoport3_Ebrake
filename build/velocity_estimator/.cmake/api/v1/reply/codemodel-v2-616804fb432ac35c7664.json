@@ -1,0 +1,88 @@
+{
+	"configurations" : 
+	[
+		{
+			"directories" : 
+			[
+				{
+					"build" : ".",
+					"hasInstallRule" : true,
+					"jsonFile" : "directory-.-07e54de076cb8fb09d97.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.12"
+					},
+					"projectIndex" : 0,
+					"source" : ".",
+					"targetIndexes" : 
+					[
+						0,
+						1,
+						2,
+						3
+					]
+				}
+			],
+			"name" : "",
+			"projects" : 
+			[
+				{
+					"directoryIndexes" : 
+					[
+						0
+					],
+					"name" : "velocity_estimator",
+					"targetIndexes" : 
+					[
+						0,
+						1,
+						2,
+						3
+					]
+				}
+			],
+			"targets" : 
+			[
+				{
+					"directoryIndex" : 0,
+					"id" : "pose_publisher::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-pose_publisher-593ed0ff1fcef4ddc182.json",
+					"name" : "pose_publisher",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "uninstall::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-uninstall-ff31550a3065f1a0b227.json",
+					"name" : "uninstall",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "velocity_estimator::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-velocity_estimator-74b1769b5a6a6a049726.json",
+					"name" : "velocity_estimator",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "velocity_estimator_uninstall::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-velocity_estimator_uninstall-b533c29fe10f431b2bba.json",
+					"name" : "velocity_estimator_uninstall",
+					"projectIndex" : 0
+				}
+			]
+		}
+	],
+	"kind" : "codemodel",
+	"paths" : 
+	{
+		"build" : "/home/daneil04/Project_ws/src/Csoport3_Ebrake-/build/velocity_estimator",
+		"source" : "/home/daneil04/Project_ws/src/Csoport3_Ebrake-/examples/c++/velocity_estimator"
+	},
+	"version" : 
+	{
+		"major" : 2,
+		"minor" : 3
+	}
+}

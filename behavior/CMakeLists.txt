@@ -12,6 +12,9 @@ find_package(std_msgs REQUIRED)
 
 # Add executable
 add_executable(behavior_node src/behavior_node.cpp)
+target_include_directories(behavior_node PUBLIC
+  $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
+  $<INSTALL_INTERFACE:include>)
 ament_target_dependencies(behavior_node rclcpp std_msgs)
 
 # Install executables

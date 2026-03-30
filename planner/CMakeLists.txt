@@ -12,6 +12,9 @@ find_package(std_msgs REQUIRED)
 
 # Add executable
 add_executable(planner_node src/planner_node.cpp)
+target_include_directories(planner_node PUBLIC
+  $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
+  $<INSTALL_INTERFACE:include>)
 ament_target_dependencies(planner_node rclcpp std_msgs)
 
 # Install executables

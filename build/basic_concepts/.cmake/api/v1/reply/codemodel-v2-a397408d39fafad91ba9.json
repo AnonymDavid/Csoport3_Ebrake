@@ -1,0 +1,88 @@
+{
+	"configurations" : 
+	[
+		{
+			"directories" : 
+			[
+				{
+					"build" : ".",
+					"hasInstallRule" : true,
+					"jsonFile" : "directory-.-32afcdded074a552e23c.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.12"
+					},
+					"projectIndex" : 0,
+					"source" : ".",
+					"targetIndexes" : 
+					[
+						0,
+						1,
+						2,
+						3
+					]
+				}
+			],
+			"name" : "",
+			"projects" : 
+			[
+				{
+					"directoryIndexes" : 
+					[
+						0
+					],
+					"name" : "basic_concepts",
+					"targetIndexes" : 
+					[
+						0,
+						1,
+						2,
+						3
+					]
+				}
+			],
+			"targets" : 
+			[
+				{
+					"directoryIndex" : 0,
+					"id" : "basic_concepts_uninstall::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-basic_concepts_uninstall-1ecfb9a5da3cfbc9c3e8.json",
+					"name" : "basic_concepts_uninstall",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "publisher_demo::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-publisher_demo-ad24418c32dbadd87d91.json",
+					"name" : "publisher_demo",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "subscriber_demo::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-subscriber_demo-c4035507e6574b36c26b.json",
+					"name" : "subscriber_demo",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "uninstall::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-uninstall-85cdd2464fd29f1626b7.json",
+					"name" : "uninstall",
+					"projectIndex" : 0
+				}
+			]
+		}
+	],
+	"kind" : "codemodel",
+	"paths" : 
+	{
+		"build" : "/home/daneil04/Project_ws/src/Csoport3_Ebrake-/build/basic_concepts",
+		"source" : "/home/daneil04/Project_ws/src/Csoport3_Ebrake-/examples/c++/basic_concepts"
+	},
+	"version" : 
+	{
+		"major" : 2,
+		"minor" : 3
+	}
+}

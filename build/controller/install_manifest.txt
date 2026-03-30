@@ -1,0 +1,16 @@
+/home/daneil04/Project_ws/src/Csoport3_Ebrake-/install/controller/lib/controller/controller_node
+/home/daneil04/Project_ws/src/Csoport3_Ebrake-/install/controller/share/ament_index/resource_index/package_run_dependencies/controller
+/home/daneil04/Project_ws/src/Csoport3_Ebrake-/install/controller/share/ament_index/resource_index/parent_prefix_path/controller
+/home/daneil04/Project_ws/src/Csoport3_Ebrake-/install/controller/share/controller/environment/ament_prefix_path.sh
+/home/daneil04/Project_ws/src/Csoport3_Ebrake-/install/controller/share/controller/environment/ament_prefix_path.dsv
+/home/daneil04/Project_ws/src/Csoport3_Ebrake-/install/controller/share/controller/environment/path.sh
+/home/daneil04/Project_ws/src/Csoport3_Ebrake-/install/controller/share/controller/environment/path.dsv
+/home/daneil04/Project_ws/src/Csoport3_Ebrake-/install/controller/share/controller/local_setup.bash
+/home/daneil04/Project_ws/src/Csoport3_Ebrake-/install/controller/share/controller/local_setup.sh
+/home/daneil04/Project_ws/src/Csoport3_Ebrake-/install/controller/share/controller/local_setup.zsh
+/home/daneil04/Project_ws/src/Csoport3_Ebrake-/install/controller/share/controller/local_setup.dsv
+/home/daneil04/Project_ws/src/Csoport3_Ebrake-/install/controller/share/controller/package.dsv
+/home/daneil04/Project_ws/src/Csoport3_Ebrake-/install/controller/share/ament_index/resource_index/packages/controller
+/home/daneil04/Project_ws/src/Csoport3_Ebrake-/install/controller/share/controller/cmake/controllerConfig.cmake
+/home/daneil04/Project_ws/src/Csoport3_Ebrake-/install/controller/share/controller/cmake/controllerConfig-version.cmake
+/home/daneil04/Project_ws/src/Csoport3_Ebrake-/install/controller/share/controller/package.xml

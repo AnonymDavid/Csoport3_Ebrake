@@ -1,0 +1,16 @@
+/home/daneil04/Project_ws/src/Csoport3_Ebrake-/install/planner/lib/planner/planner_node
+/home/daneil04/Project_ws/src/Csoport3_Ebrake-/install/planner/share/ament_index/resource_index/package_run_dependencies/planner
+/home/daneil04/Project_ws/src/Csoport3_Ebrake-/install/planner/share/ament_index/resource_index/parent_prefix_path/planner
+/home/daneil04/Project_ws/src/Csoport3_Ebrake-/install/planner/share/planner/environment/ament_prefix_path.sh
+/home/daneil04/Project_ws/src/Csoport3_Ebrake-/install/planner/share/planner/environment/ament_prefix_path.dsv
+/home/daneil04/Project_ws/src/Csoport3_Ebrake-/install/planner/share/planner/environment/path.sh
+/home/daneil04/Project_ws/src/Csoport3_Ebrake-/install/planner/share/planner/environment/path.dsv
+/home/daneil04/Project_ws/src/Csoport3_Ebrake-/install/planner/share/planner/local_setup.bash
+/home/daneil04/Project_ws/src/Csoport3_Ebrake-/install/planner/share/planner/local_setup.sh
+/home/daneil04/Project_ws/src/Csoport3_Ebrake-/install/planner/share/planner/local_setup.zsh
+/home/daneil04/Project_ws/src/Csoport3_Ebrake-/install/planner/share/planner/local_setup.dsv
+/home/daneil04/Project_ws/src/Csoport3_Ebrake-/install/planner/share/planner/package.dsv
+/home/daneil04/Project_ws/src/Csoport3_Ebrake-/install/planner/share/ament_index/resource_index/packages/planner
+/home/daneil04/Project_ws/src/Csoport3_Ebrake-/install/planner/share/planner/cmake/plannerConfig.cmake
+/home/daneil04/Project_ws/src/Csoport3_Ebrake-/install/planner/share/planner/cmake/plannerConfig-version.cmake
+/home/daneil04/Project_ws/src/Csoport3_Ebrake-/install/planner/share/planner/package.xml
