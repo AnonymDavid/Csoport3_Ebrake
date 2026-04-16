@@ -9,13 +9,15 @@ endif()
 find_package(ament_cmake REQUIRED)
 find_package(rclcpp REQUIRED)
 find_package(std_msgs REQUIRED)
+find_package(crp_msgs REQUIRED)
+find_package(autoware_control_msgs REQUIRED)
 
 # Add executable
 add_executable(planner_node src/planner_node.cpp)
 target_include_directories(planner_node PUBLIC
   $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
   $<INSTALL_INTERFACE:include>)
-ament_target_dependencies(planner_node rclcpp std_msgs)
+ament_target_dependencies(planner_node rclcpp std_msgs crp_msgs autoware_control_msgs)
 
 # Install executables
 install(TARGETS

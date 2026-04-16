@@ -2,60 +2,62 @@
 
 BehaviorNode::BehaviorNode() : Node("behavior_node")
 {
+  // 1. Feliratkozás a Planner által számolt fékútra (brake_distance_topic)
   brake_distance_subscription_ = this->create_subscription<std_msgs::msg::Float32>(
-      "brake_distance_topic", 10, std::bind(&BehaviorNode::brake_distance_callback, this, std::placeholders::_1));
+    "brake_distance_topic", 10, std::bind(&BehaviorNode::brake_distance_callback, this, std::placeholders::_1));
 
-  distance_subscription_ = this->create_subscription<std_msgs::msg::Float32>(
-      "distance_topic", 10, std::bind(&BehaviorNode::distance_callback, this, std::placeholders::_1));
+  // 2. Feliratkozás a szimulátor Scenario topicjára a VALÓS távolságért
+  scenario_subscription_ = this->create_subscription<crp_msgs::msg::Scenario>(
+    "scenario", 10, std::bind(&BehaviorNode::scenario_callback, this, std::placeholders::_1));
 
+  // 3. Publikáló a ControllerNode felé
   brake_command_publisher_ = this->create_publisher<std_msgs::msg::Bool>("brake_command_topic", 10);
 
-  RCLCPP_INFO(this->get_logger(), "Behavior node is running");
+  RCLCPP_INFO(this->get_logger(), "Behavior node elindult és figyeli a távolságot.");
 }
 
-void BehaviorNode::brake_distance_callback(const std_msgs::msg::Float32 & msg)
+void BehaviorNode::brake_distance_callback(const std_msgs::msg::Float32::SharedPtr msg)
 {
-  brake_distance_ = msg.data;
-  evaluate_brake_decision();
+  calculated_brake_distance_ = msg->data;
+  check_safety();
 }
 
-void BehaviorNode::distance_callback(const std_msgs::msg::Float32 & msg)
+void BehaviorNode::scenario_callback(const crp_msgs::msg::Scenario::SharedPtr msg)
 {
-  object_distance_ = msg.data;
-  evaluate_brake_decision();
-}
-
-void BehaviorNode::evaluate_brake_decision()
-{
-  bool previous_state = should_brake_;
-
-  // Hard limit és sima fékezés elkülönítése
-    if (object_distance_ > 0 && object_distance_ <= (brake_distance_ * 0.4)) 
-    {
-        should_brake_ = true;
-        RCLCPP_WARN(this->get_logger(), "!!! HARD LIMIT AKTÍV - VÉSZFÉKEZÉS !!!");
-    }
-    else if (object_distance_ > 0 && object_distance_ <= brake_distance_)
-    {
-        should_brake_ = true;
-        RCLCPP_INFO(this->get_logger(), "Sima fékezés aktív");
-    }
-    else 
-    {
-        should_brake_ = false;
-    }
-
-  // we only publish if the brake command has changed or if there is an object detected
-  if (should_brake_ != previous_state || object_distance_ > 0)
+  // Megkeressük a legközelebbi objektumot a szimulátor üzenetéből
+  if (!msg->local_moving_objects.objects.empty()) 
   {
-    auto brake_msg = std_msgs::msg::Bool();
-    brake_msg.data = should_brake_;
-    brake_command_publisher_->publish(brake_msg);
-
-    RCLCPP_INFO(this->get_logger(),
-                "Távolság: %.2f m | Fékút: %.2f m | Fék: %s",
-                object_distance_, brake_distance_, should_brake_ ? "IGEN" : "NEM");
+    // A Simulator.cpp base_link-ben adja meg, az X a távolságunk
+    actual_distance_ = msg->local_moving_objects.objects[0].kinematics.initial_pose_with_covariance.pose.position.x;
+  } 
+  else 
+  {
+    actual_distance_ = 100.0; // Ha nincs akadály, legyen messze
   }
+  check_safety();
+}
+
+void BehaviorNode::check_safety()
+{
+  auto brake_msg = std_msgs::msg::Bool();
+
+  // DÖNTÉS: Ha a távolság kisebb, mint a fékút + 5 méter biztonsági ráhagyás
+  if (actual_distance_ < (calculated_brake_distance_ + 5.0)) 
+  {
+    brake_msg.data = true;
+    if (!should_brake_) {
+      RCLCPP_WARN(this->get_logger(), "Veszélyes közelség! Fékút: %.2f m | Távolság: %.2f m", 
+                  calculated_brake_distance_, actual_distance_);
+    }
+    should_brake_ = true;
+  } 
+  else 
+  {
+    brake_msg.data = false;
+    should_brake_ = false;
+  }
+
+  brake_command_publisher_->publish(brake_msg);
 }
 
 int main(int argc, char * argv[])

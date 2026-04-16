@@ -3,7 +3,7 @@
 
 #include "rclcpp/rclcpp.hpp"
 #include "std_msgs/msg/bool.hpp"
-#include "std_msgs/msg/float32.hpp"
+#include "autoware_control_msgs/msg/control.hpp" // Ez kell a Float32 helyett
 
 class ControllerNode : public rclcpp::Node
 {
@@ -12,7 +12,7 @@ public:
 
 private:
   rclcpp::Subscription<std_msgs::msg::Bool>::SharedPtr brake_command_subscription_;
-  rclcpp::Publisher<std_msgs::msg::Float32>::SharedPtr brake_output_publisher_;
+  rclcpp::Publisher<autoware_control_msgs::msg::Control>::SharedPtr brake_output_publisher_;
 
   bool is_braking_ = false;
 

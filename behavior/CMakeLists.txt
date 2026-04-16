@@ -9,13 +9,15 @@ endif()
 find_package(ament_cmake REQUIRED)
 find_package(rclcpp REQUIRED)
 find_package(std_msgs REQUIRED)
+find_package(crp_msgs REQUIRED)
+find_package(autoware_control_msgs REQUIRED)
 
 # Add executable
 add_executable(behavior_node src/behavior_node.cpp)
 target_include_directories(behavior_node PUBLIC
   $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
   $<INSTALL_INTERFACE:include>)
-ament_target_dependencies(behavior_node rclcpp std_msgs)
+ament_target_dependencies(behavior_node rclcpp std_msgs crp_msgs autoware_control_msgs)
 
 # Install executables
 install(TARGETS
@@ -28,5 +30,9 @@ if(BUILD_TESTING)
   set(ament_cmake_cpplint_FOUND TRUE)
   ament_lint_auto_find_test_dependencies()
 endif()
+
+install(DIRECTORY launch
+  DESTINATION share/${PROJECT_NAME}
+)
 
 ament_package()

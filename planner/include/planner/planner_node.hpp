@@ -2,6 +2,8 @@
 #define PLANNER__PLANNER_NODE_HPP_
 
 #include "rclcpp/rclcpp.hpp"
+#include "crp_msgs/msg/ego.hpp"
+#include "crp_msgs/msg/scenario.hpp"
 #include "std_msgs/msg/float32.hpp"
 
 class PlannerNode : public rclcpp::Node
@@ -13,15 +15,15 @@ private:
   static constexpr double G = 9.81;  // gravitációs gyorsulás (m/s^2)
   static constexpr double MU = 0.7;  // súrlódási együttható (száraz aszfalt)
 
-  rclcpp::Subscription<std_msgs::msg::Float32>::SharedPtr speed_subscription_;
-  rclcpp::Subscription<std_msgs::msg::Float32>::SharedPtr distance_subscription_;
+  rclcpp::Subscription<crp_msgs::msg::Ego>::SharedPtr speed_subscription_;
+  rclcpp::Subscription<crp_msgs::msg::Scenario>::SharedPtr distance_subscription_;
   rclcpp::Publisher<std_msgs::msg::Float32>::SharedPtr brake_distance_publisher_;
 
   double current_speed_ = 0.0;
   double current_distance_ = 0.0;
 
-  void speed_callback(const std_msgs::msg::Float32 & msg);
-  void distance_callback(const std_msgs::msg::Float32 & msg);
+  void speed_callback(const crp_msgs::msg::Ego::SharedPtr msg);
+  void distance_callback(const crp_msgs::msg::Scenario::SharedPtr msg);
   double calculate_brake_distance(double speed_kmh);
 };
 
