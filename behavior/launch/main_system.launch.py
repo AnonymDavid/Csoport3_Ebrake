@@ -23,6 +23,8 @@ def generate_launch_description():
     launch_sim = IncludeLaunchDescription(
         PythonLaunchDescriptionSource(os.path.join(pkg_sim, 'launch', 'simulator.launch.py')),
         launch_arguments={'use_sim_time': use_sim_time}.items()
+        
+        
     )
     
     # 2. Vizualizáció (Python launch)
@@ -67,9 +69,12 @@ def generate_launch_description():
 
     # --- Indítási Lista Összeállítása ---
     return LaunchDescription([
-        DeclareLaunchArgument('use_sim_time', default_value='true', description='Use simulation clock'),
-        
-        
+        DeclareLaunchArgument('use_sim_time', default_value='true', description='Use simulation clock'),   
+        DeclareLaunchArgument(
+            '/simulator/initial_object_state', 
+            default_value='[100.0, 0.0, 0.0]',
+            description='Initial object state as [x, vx, ax]'
+        ),
         
         # Külső launchok
         launch_sim,
