@@ -6,6 +6,8 @@ from launch.launch_description_sources import PythonLaunchDescriptionSource, Any
 from launch.substitutions import LaunchConfiguration
 from launch_ros.actions import Node
 
+# ros2 launch behavior main_system.launch.py
+
 def generate_launch_description():
     
     # --- Konfiguráció ---
@@ -72,7 +74,7 @@ def generate_launch_description():
         DeclareLaunchArgument('use_sim_time', default_value='true', description='Use simulation clock'),   
         DeclareLaunchArgument(
             '/simulator/initial_object_state', 
-            default_value='[100.0, 0.0, 0.0]',
+            default_value='[200.0, 0.0, 0.0]',
             description='Initial object state as [x, vx, ax]'
         ),
         
