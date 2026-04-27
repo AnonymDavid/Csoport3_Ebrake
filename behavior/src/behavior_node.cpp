@@ -42,7 +42,7 @@ void BehaviorNode::check_safety()
   auto brake_msg = std_msgs::msg::Bool();
 
   // DÖNTÉS: Ha a távolság kisebb, mint a fékút + 5 méter biztonsági ráhagyás
-  if (actual_distance_ < (calculated_brake_distance_ + 5.0)) 
+  if (actual_distance_ < (calculated_brake_distance_ + 10.0)) 
   {
     brake_msg.data = true;
     if (!should_brake_) {

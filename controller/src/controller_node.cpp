@@ -35,7 +35,7 @@ void ControllerNode::apply_brake(bool brake_active)
     // A szimulátor belső szabályozójának 0 célsebességet adunk
     control_msg.longitudinal.velocity = 0.0; 
     // Megadjuk a maximális lassulást
-    control_msg.longitudinal.acceleration = -20.0; 
+    control_msg.longitudinal.acceleration = -5.0; 
     
     RCLCPP_WARN(this->get_logger(), "⚠️ VÉSZFÉKEZÉS AKTIVÁLVA - Megállás parancs elküldve");
   }

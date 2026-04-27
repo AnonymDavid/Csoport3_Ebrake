@@ -21,6 +21,10 @@ private:
 
   double current_speed_ = 0.0;
   double current_distance_ = 0.0;
+  double last_speed_ = 0.0;
+  double last_accel_ = 0.0;
+  rclcpp::Time last_time_;
+  bool first_run_ = true;
 
   void speed_callback(const crp_msgs::msg::Ego::SharedPtr msg);
   void distance_callback(const crp_msgs::msg::Scenario::SharedPtr msg);
