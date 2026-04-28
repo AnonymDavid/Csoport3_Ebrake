@@ -2,7 +2,7 @@
 
 BehaviorNode::BehaviorNode() : Node("behavior_node")
 {
-  // 1. Feliratkozás a Planner által számolt fékútra (brake_distance_topic)
+  strategy_publisher_ = this->create_publisher<tier4_planning_msgs::msg::Scenario>("plan/strategy", 10);
   brake_distance_subscription_ = this->create_subscription<std_msgs::msg::Float32>(
     "brake_distance_topic", 10, std::bind(&BehaviorNode::brake_distance_callback, this, std::placeholders::_1));
 
@@ -40,24 +40,35 @@ void BehaviorNode::scenario_callback(const crp_msgs::msg::Scenario::SharedPtr ms
 void BehaviorNode::check_safety()
 {
   auto brake_msg = std_msgs::msg::Bool();
+  tier4_planning_msgs::msg::Scenario strategy_msg; // Az új típus
 
-  // DÖNTÉS: Ha a távolság kisebb, mint a fékút + 5 méter biztonsági ráhagyás
-  if (actual_distance_ < (calculated_brake_distance_ + 10.0)) 
+  if (actual_distance_ < 5.0 || actual_distance_ < (calculated_brake_distance_))
   {
+    strategy_msg.current_scenario = "longEmergencyImpact";
     brake_msg.data = true;
-    if (!should_brake_) {
-      RCLCPP_WARN(this->get_logger(), "Veszélyes közelség! Fékút: %.2f m | Távolság: %.2f m", 
-                  calculated_brake_distance_, actual_distance_);
-    }
     should_brake_ = true;
-  } 
-  else 
+  }
+  else if (actual_distance_ < (calculated_brake_distance_ + 10.0))
   {
+    strategy_msg.current_scenario = "longEmergencyAvoid";
+    brake_msg.data = true;
+    should_brake_ = true;
+  }
+  else if (actual_distance_ < (calculated_brake_distance_ + 20.0))
+  {
+    strategy_msg.current_scenario = "warningLevel";
+    brake_msg.data = false;
+    should_brake_ = false;
+  }
+  else
+  {
+    strategy_msg.current_scenario = "noAction";
     brake_msg.data = false;
     should_brake_ = false;
   }
 
   brake_command_publisher_->publish(brake_msg);
+  strategy_publisher_->publish(strategy_msg);
 }
 
 int main(int argc, char * argv[])

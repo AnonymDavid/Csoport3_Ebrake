@@ -6,6 +6,7 @@
 #include "std_msgs/msg/float32.hpp"
 // Új függőség a szimulátor környezeti adataihoz
 #include "crp_msgs/msg/scenario.hpp"
+#include "tier4_planning_msgs/msg/scenario.hpp"
 
 class BehaviorNode : public rclcpp::Node
 {
@@ -13,7 +14,8 @@ public:
   explicit BehaviorNode();
 
 private:
-  // Előfizetés a Planner által számolt fékútra
+
+  rclcpp::Publisher<tier4_planning_msgs::msg::Scenario>::SharedPtr strategy_publisher_;
   rclcpp::Subscription<std_msgs::msg::Float32>::SharedPtr brake_distance_subscription_;
 
   // ÚJ: Előfizetés a szimulátor Scenario topicjára a valós távolsághoz
