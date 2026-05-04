@@ -79,9 +79,9 @@ def generate_launch_description():
         ),
         
         # Külső launchok
-        launch_sim,
-        launch_viz,
-        launch_fox,
+        # launch_sim,
+        # launch_viz,
+        # launch_fox,
         
         # Saját node-ok
         node_planner,
