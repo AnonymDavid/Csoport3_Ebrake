@@ -42,14 +42,14 @@ void BehaviorNode::check_safety()
 
   if (actual_distance_ < 5.0 || actual_distance_ < calculated_brake_distance_)
   {
-    strategy_msg.current_scenario = "longEmergencyImpact";
+    strategy_msg.current_scenario = "LONG_EMERGENCY_IMPACT";
     brake_msg.data = true;
     should_brake_ = true;
     emergency_triggered_ = true;
   }
   else if (actual_distance_ < (calculated_brake_distance_ + 5.0))
   {
-    strategy_msg.current_scenario = "longEmergencyAvoid";
+    strategy_msg.current_scenario = "LONG_EMERGENCY_AVOID";
     brake_msg.data = true;
     should_brake_ = true;
     emergency_triggered_ = true;
@@ -58,20 +58,20 @@ void BehaviorNode::check_safety()
   {
     if (emergency_triggered_)
     {
-      strategy_msg.current_scenario = "longEmergencyAvoid";
+      strategy_msg.current_scenario = "LONG_EMERGENCY_AVOID";
       brake_msg.data = true;
       should_brake_ = true;
     }
     else
     {
-      strategy_msg.current_scenario = "warningLevel";
+      strategy_msg.current_scenario = "WARNING_LEVEL";
       brake_msg.data = false;
       should_brake_ = false;
     }
   }
   else
   {
-    strategy_msg.current_scenario = "noAction";
+    strategy_msg.current_scenario = "NO_ACTION";
     brake_msg.data = false;
     should_brake_ = false;
   }
