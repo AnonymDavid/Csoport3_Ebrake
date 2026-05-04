@@ -40,14 +40,14 @@ void BehaviorNode::check_safety()
   auto brake_msg = std_msgs::msg::Bool();
   tier4_planning_msgs::msg::Scenario strategy_msg;
 
-  if (actual_distance_ < 5.0 || actual_distance_ < calculated_brake_distance_)
+  if (actual_distance_ <= 1.5 || actual_distance_ < calculated_brake_distance_)
   {
     strategy_msg.current_scenario = "LONG_EMERGENCY_IMPACT";
     brake_msg.data = true;
     should_brake_ = true;
     emergency_triggered_ = true;
   }
-  else if (actual_distance_ < (calculated_brake_distance_ + 5.0))
+  else if (actual_distance_ < (calculated_brake_distance_ + 1.5))
   {
     strategy_msg.current_scenario = "LONG_EMERGENCY_AVOID";
     brake_msg.data = true;
@@ -56,24 +56,40 @@ void BehaviorNode::check_safety()
   }
   else if (actual_distance_ < (calculated_brake_distance_ + 10.0))
   {
-    if (emergency_triggered_)
-    {
-      strategy_msg.current_scenario = "LONG_EMERGENCY_AVOID";
-      brake_msg.data = true;
-      should_brake_ = true;
-    }
-    else
+    if (!emergency_triggered_)
     {
       strategy_msg.current_scenario = "WARNING_LEVEL";
       brake_msg.data = false;
       should_brake_ = false;
     }
+    else
+    {
+      strategy_msg.current_scenario = "LONG_EMERGENCY_AVOID";
+    brake_msg.data = true;
+    should_brake_ = true;
+    }
   }
   else
   {
-    strategy_msg.current_scenario = "NO_ACTION";
-    brake_msg.data = false;
-    should_brake_ = false;
+    if (!emergency_triggered_)
+    {
+      strategy_msg.current_scenario = "NO_ACTION";
+      brake_msg.data = false;
+      should_brake_ = false;
+    }
+    else
+    {
+      if (actual_distance_ <= 1.0 || actual_distance_ < calculated_brake_distance_)
+      {
+        strategy_msg.current_scenario = "LONG_EMERGENCY_IMPACT";
+      }
+      else
+      {
+        strategy_msg.current_scenario = "LONG_EMERGENCY_AVOID";
+      }
+        brake_msg.data = true;
+        should_brake_ = true;
+    }
   }
 
   brake_command_publisher_->publish(brake_msg);
