@@ -31,6 +31,7 @@ void BehaviorNode::scenario_callback(const crp_msgs::msg::Scenario::SharedPtr ms
   else 
   {
     actual_distance_ = 100.0;
+  }
   check_safety();
 }
 
@@ -51,7 +52,8 @@ void BehaviorNode::check_safety()
     strategy_msg.current_scenario = "longEmergencyAvoid";
     brake_msg.data = true;
     should_brake_ = true;
-    emergency_triggered_ = true; 
+    emergency_triggered_ = true;
+  }
   else if (actual_distance_ < (calculated_brake_distance_ + 10.0))
   {
     if (emergency_triggered_)
@@ -72,7 +74,6 @@ void BehaviorNode::check_safety()
     strategy_msg.current_scenario = "noAction";
     brake_msg.data = false;
     should_brake_ = false;
-    emergency_triggered_ = false;
   }
 
   brake_command_publisher_->publish(brake_msg);
